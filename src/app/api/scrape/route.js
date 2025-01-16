@@ -25,13 +25,18 @@ export async function GET(req) {
         const projectName = el.querySelector('.mghome__prjblk__prjname')?.innerText.trim();
         const location = el.querySelector('.mghome__prjblk__locname')?.innerText.trim();
         const priceRange = el.querySelector('.mghome__prjblk__price')?.innerText.trim();
+        const imageElement = el.querySelector(".mghome__prjblk__imgsec__img");
+        const imageUrl = imageElement
+          ? imageElement.getAttribute("data-src") || imageElement.getAttribute("src")
+          : null;
 
-        if (projectName && location && priceRange) {
-          items.push({ projectName, location, priceRange });
+        if (projectName && location && priceRange && imageUrl) {
+          items.push({ projectName, location, priceRange, imageUrl });
         }
       });
       return items;
     });
+
 
     console.log(projects);
 

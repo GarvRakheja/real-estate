@@ -21,13 +21,12 @@ const Home = () => {
     };
 
     useEffect(() => {
-        // Extract city from pathname if exists
         const pathParts = pathname.split('/');
-        const city = pathParts[pathParts.length - 1]; // Get the last part of the URL
+        const city = pathParts[pathParts.length - 1];
         if (city && city !== "city") {
             setSelectedCity(city);
         } else {
-            setSelectedCity(null); // Reset if it's the home page
+            setSelectedCity(null);
         }
     }, [pathname]);
 
@@ -45,7 +44,7 @@ const Home = () => {
                         className="z-0"
                     />
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-20 space-y-4 px-4 lg:gap-6">
-                        <h1 className="text-4xl md:text-6xl lg:text-8xl font-medium drop-shadow-md">Real Homes</h1>
+                            <h1 className="text-4xl md:text-6xl lg:text-8xl font-medium drop-shadow-md">Real Homes</h1>
                         <h1 className="text-2xl md:text-4xl lg:text-7xl text-[#ffc72d]">Encyclopedia For All New Projects</h1>
                         <button className="flex justify-center items-center gap-5"
                             onClick={() => setIsModalOpen(true)}
@@ -58,14 +57,18 @@ const Home = () => {
                         </button>
                     </div>
                 </div>
-
-                {/* Render the modal when isModalOpen is true */}
+                {
+                    selectedCity &&
+                    <div className='text-center py-3 md:text-[27px] font-extrabold underline underline-offset-8 decoration-red-500'>
+                        <h1>All New Projects in {selectedCity}</h1>
+                    </div>
+                }
             </div>
 
             {isModalOpen && (
                 <CityModal
                     handleCityChange={handleCityChange}
-                    closeModal={closeModal} // Pass closeModal function to close the modal
+                    closeModal={closeModal}
                 />
             )}
         </>
